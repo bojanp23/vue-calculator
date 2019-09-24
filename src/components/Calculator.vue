@@ -123,7 +123,7 @@ export default {
       this.previuousResult = this.result
       this.operatorClicked = true
     },
-    
+
     clear () {
       this.result = ''
     },
@@ -149,23 +149,23 @@ export default {
     },
 
     sum () {
-      this.operator = (a,b) => a+b
+      this.operator = (a, b) => a + b
       console.log(this.operator)
       this.setPreviousResult()
     },
 
     substract () {
-      this.operator = (a,b) => b-a
+      this.operator = (a, b) => b - a
       this.setPreviousResult()
     },
 
     multiply () {
-      this.operator = (a,b) => a*b
+      this.operator = (a, b) => a * b
       this.setPreviousResult()
     },
 
     divide () {
-      this.operator = (a,b) => b/a
+      this.operator = (a, b) => b / a
       this.setPreviousResult()
     },
 
@@ -175,7 +175,7 @@ export default {
         parseFloat(this.previuousResult)
       )
       this.previuousResult = this.result
-    },
+    }
   }
 }
 </script>
