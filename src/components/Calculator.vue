@@ -25,7 +25,7 @@
           </CalculatorButton>
 
           <CalculatorButton
-            :onClick="consoleClick"
+            :onClick="sum"
             class="operator">+
           </CalculatorButton>
 
@@ -42,7 +42,7 @@
           </CalculatorButton>
 
           <CalculatorButton
-            :onClick="consoleClick"
+            :onClick="substract"
             class="operator">-
           </CalculatorButton>
 
@@ -59,7 +59,7 @@
           </CalculatorButton>
 
           <CalculatorButton
-            :onClick="consoleClick"
+            :onClick="multiply"
             class="operator">*
           </CalculatorButton>
 
@@ -76,7 +76,7 @@
           </CalculatorButton>
 
           <CalculatorButton
-            :onClick="consoleClick"
+            :onClick="divide"
             class="operator">/
           </CalculatorButton>
 
@@ -90,7 +90,7 @@
           </CalculatorButton>
 
           <CalculatorButton
-            :onClick="consoleClick"
+            :onClick="equal"
             class="operator">=
           </CalculatorButton>
 
@@ -112,34 +112,70 @@ export default {
   },
   data () {
     return {
-      result: 0
+      result: 0,
+      previuousResult: null,
+      operator: null,
+      operatorClicked: false
     }
   },
   methods: {
+    setPreviousResult () {
+      this.previuousResult = this.result
+      this.operatorClicked = true
+    },
+    
+    clear () {
+      this.result = ''
+    },
+
     appendNumber (e) {
+      if (this.operatorClicked) {
+        this.result = ''
+        this.operatorClicked = false
+      }
       var value = e.target.innerText
       this.result = parseFloat(this.result + value)
     },
 
     percents () {
-      this.result = this.result/100
-    },
-
-    clear () {
-      this.result = ''
+      this.result = this.result / 100
     },
 
     decimal () {
-      this.result = this.result + ""
+      this.result = this.result + ''
       if (this.result.indexOf('.') === -1) {
         this.result = this.result + '.'
       }
-
     },
 
-    consoleClick () {
-      console.log('Button clicked')
-    }
+    sum () {
+      this.operator = (a,b) => a+b
+      console.log(this.operator)
+      this.setPreviousResult()
+    },
+
+    substract () {
+      this.operator = (a,b) => b-a
+      this.setPreviousResult()
+    },
+
+    multiply () {
+      this.operator = (a,b) => a*b
+      this.setPreviousResult()
+    },
+
+    divide () {
+      this.operator = (a,b) => b/a
+      this.setPreviousResult()
+    },
+
+    equal () {
+      this.result = this.operator(
+        parseFloat(this.result),
+        parseFloat(this.previuousResult)
+      )
+      this.previuousResult = this.result
+    },
   }
 }
 </script>

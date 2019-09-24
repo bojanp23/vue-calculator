@@ -10,7 +10,7 @@ export default {
   name: 'CalculatorDisplay',
   props: {
     result: {
-      type: Number,
+      type: [Number, String],
       required: true
     }
   }
